@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Noticias - Inicio</title>
+</head>
+<body>
+    <h1>Lista de Noticias</h1>
+    <form method="POST" action="{% url 'resultados' %}">
+        {% csrf_token %}
+        <label for="palabra_clave">Palabra clave:</label>
+        <input type="text" name="palabra_clave" id="palabra_clave">
+        <input type="submit" value="Buscar">
+    </form>
+</body>
+</html>
