@@ -5,13 +5,26 @@ from django.http import HttpResponse
 def filtrar_titulares(palabra_clave):
     # Lista de titulares de noticias
     titulares = [
-        'Venta de armas en aumento',
-        'Nuevas medidas de seguridad en aeropuertos',
-        'Ciberataques afectan a grandes empresas',
-        'Avances en la medicina contra el cáncer',
-        'El cambio climático y sus consecuencias',
-        'Inauguración de un nuevo centro educativo',
-        # Agrega más titulares aquí
+        "Aumenta la demanda de energías renovables",
+"Desarrollan vacuna efectiva contra el virus del dengue",
+"El mercado de criptomonedas experimenta volatilidad",
+"Descubren nueva especie de dinosaurio en América ",
+"Avanza la investigación para la cura del Alzheimer",
+"Lanzamiento exitoso del satélite espacial comercial",
+"Nuevas regulaciones para proteger el medio ambiente",
+"Inauguración de un parque dedicado a la historia local",
+"Las ventas de carros eléctricos alcanzan cifras récord",
+"Investigadores descubren evidencias de vida en Marte",
+"Crece la preocupación por el calentamiento global",
+"Se detecta una nueva variante de virus informático",
+"Declaran emergencia sanitaria por brote de enfermedad ",
+"Desarrollan tecnología para la generación de energía limpia",
+"Celebridades se unen para luchar contra el hambre en el mundo",
+"Avances en la inteligencia artificial transforman la industria",
+"Nuevo récord de producción de alimentos orgánicos",
+"Descubren posible cura para la diabetes tipo 2",
+"Conferencia aborda el futuro de la exploración espacial",
+"Invertir en bienes raíces: una opción segura ",
     ]
 
     # Filtrar los titulares que incluyen la palabra clave
@@ -41,9 +54,11 @@ def resultados(request):
     if palabra_clave is not None:
         # Realizar la búsqueda y filtrar los titulares
         titulares_filtrados = filtrar_titulares(palabra_clave)
-        # Pasar los titulares filtrados a la plantilla
+        # Obtener los titulares completos sin filtrar
+        titulares_completos = [titular for titular in filtrar_titulares('')]
+        # Pasar los titulares completos y la palabra clave a la plantilla
         context = {
-            'titulares': titulares_filtrados,
+            'titulares': titulares_completos,
             'palabra_clave': palabra_clave,
         }
         return render(request, 'noticias/resultados.html', context)
