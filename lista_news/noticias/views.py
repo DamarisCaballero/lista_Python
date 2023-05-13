@@ -38,12 +38,14 @@ def home(request):
 
 def resultados(request):
     palabra_clave = request.GET.get('palabra_clave')
-    # Realizar la búsqueda y filtrar los titulares
-    # (Debes completar esta parte según tu implementación)
-    titulares_filtrados = filtrar_titulares(palabra_clave)
-    # Pasar los titulares filtrados a la plantilla
-    context = {
-        'titulares': titulares_filtrados,
-        'palabra_clave': palabra_clave,
-    }
-    return render(request, 'noticias/resultados.html', context)
+    if palabra_clave is not None:
+        # Realizar la búsqueda y filtrar los titulares
+        titulares_filtrados = filtrar_titulares(palabra_clave)
+        # Pasar los titulares filtrados a la plantilla
+        context = {
+            'titulares': titulares_filtrados,
+            'palabra_clave': palabra_clave,
+        }
+        return render(request, 'noticias/resultados.html', context)
+    else:
+        return redirect('home')
