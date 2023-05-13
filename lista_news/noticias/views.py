@@ -50,14 +50,17 @@ def home(request):
         return render(request, 'noticias/home.html')
 
 def resultados(request):
-    if request.method == 'POST':
-        palabra_clave = request.POST.get('palabra_clave')
-        if palabra_clave:
-            titulares_filtrados = filtrar_titulares(palabra_clave)
-            context = {
-                'titulares': titulares_filtrados,
-                'palabra_clave': palabra_clave,
-            }
-            return render(request, 'noticias/resultados.html', context)
-    return redirect('home')
-
+    palabra_clave = request.GET.get('palabra_clave')
+    if palabra_clave is not None:
+        # Realizar la búsqueda y filtrar los titulares
+        titulares_filtrados = filtrar_titulares(palabra_clave)
+        # Obtener los titulares completos sin filtrar
+        titulares_completos = [titular for titular in filtrar_titulares('')]
+        # Pasar los titulares completos y la palabra clave a la plantilla
+        context = {
+            'titulares': titulares_completos,
+            'palabra_clave': palabra_clave,
+        }
+        return render(request, 'noticias/resultados.html', context)
+    else:
+        return redirect('home')
