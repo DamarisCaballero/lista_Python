@@ -3,6 +3,7 @@ from django.http import HttpResponse
 
 
 def filtrar_titulares(palabra_clave):
+    print("Palabra clave:", palabra_clave)  # Mensaje de impresión para verificar que se está ejecutando la función
     # Lista de titulares de noticias
     titulares = [
         "Aumenta la demanda de energías renovables",
@@ -36,6 +37,7 @@ def filtrar_titulares(palabra_clave):
 def home(request):
     if request.method == 'POST':
         palabra_clave = request.POST.get('palabra_clave')
+        print("Palabra clave ingresada:", palabra_clave)  # Mensaje de impresión para verificar que se obtiene la palabra clave
         if palabra_clave:
             return redirect('resultados')
         else:
@@ -43,20 +45,4 @@ def home(request):
             return render(request, 'noticias/home.html', {'mensaje_error': mensaje_error})
     return render(request, 'noticias/home.html')
 
-def resultados(request):
-    palabra_clave = request.GET.get('palabra_clave')
-    if palabra_clave is not None:
-        # Realizar la búsqueda y filtrar los titulares
-        titulares_filtrados = filtrar_titulares(palabra_clave)
-        if len(titulares_filtrados) > 0:
-            # Pasar los titulares filtrados y la palabra clave a la plantilla
-            context = {
-                'titulares': titulares_filtrados,
-                'palabra_clave': palabra_clave,
-            }
-            return render(request, 'noticias/resultados.html', context)
-        else:
-            mensaje_error = f"No se encontraron titulares con la palabra clave '{palabra_clave}'."
-            return render(request, 'noticias/resultados.html', {'mensaje_error': mensaje_error})
-    else:
-        return redirect('home')
+
