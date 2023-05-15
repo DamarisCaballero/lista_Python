@@ -54,13 +54,12 @@ def resultados(request):
     if palabra_clave is not None:
         # Realizar la búsqueda y filtrar los titulares
         titulares_filtrados = filtrar_titulares(palabra_clave)
-        # Obtener los titulares completos sin filtrar
-        titulares_completos = [titular for titular in filtrar_titulares('')]
-        # Pasar los titulares completos y la palabra clave a la plantilla
+        # Pasar los titulares filtrados y la palabra clave a la plantilla
         context = {
-            'titulares': titulares_completos,
+            'titulares': titulares_filtrados,
             'palabra_clave': palabra_clave,
         }
         return render(request, 'noticias/resultados.html', context)
     else:
         return redirect('home')
+        
