@@ -40,7 +40,6 @@ def home(request):
             return redirect('resultados')
     return render(request, 'noticias/home.html')
 
-
 def resultados(request):
     palabra_clave = request.GET.get('palabra_clave')
     if palabra_clave is not None:
@@ -54,4 +53,3 @@ def resultados(request):
         return render(request, 'noticias/resultados.html', context)
     else:
         return redirect('home')
-        
