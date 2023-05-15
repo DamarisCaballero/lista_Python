@@ -4,25 +4,13 @@
     <title>Lista de Noticias - Resultados</title>
 </head>
 <body>
-    <h1>Resultados de la búsqueda</h1>
-    <p>Palabra clave: {{ palabra_clave }}</p>
-    <ul>
-        {% for titular in titulares %}
-        <li><a href="#">{{ titular }}</a></li>
-        {% endfor %}
-    </ul>
-
- <!-- resultados.html -->
-{% if titulares %}
-<h1>Resultados de búsqueda para "{{ palabra_clave }}"</h1>
-<ul>
-  {% for titular in titulares %}
-    <li>{{ titular }}</li>
-  {% endfor %}
-</ul>
-{% else %}
-<h1>No se encontraron resultados para "{{ palabra_clave }}"</h1>
-{% endif %}
+  <h1>Resultados de la búsqueda</h1>
+  <ul>
+    {% for titular in titulares %}
+      <li>{{ titular }}</li>
+    {% endfor %}
+  </ul>
+  
 
 </body>
 </html>
