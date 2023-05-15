@@ -45,4 +45,23 @@ def home(request):
             return render(request, 'noticias/home.html', {'mensaje_error': mensaje_error})
     return render(request, 'noticias/home.html')
 
+def resultados(request):
+    palabra_clave = request.GET.get('palabra_clave')
+    print("Palabra clave obtenida:", palabra_clave)  # Mensaje de impresión para verificar que se obtiene la palabra clave
+    if palabra_clave is not None:
+        # Realizar la búsqueda y filtrar los titulares
+        titulares_filtrados = filtrar_titulares(palabra_clave)
+        print("Titulares filtrados:", titulares_filtrados)  # Mensaje de impresión para verificar los titulares filtrados
+        if len(titulares_filtrados) > 0:
+            # Pasar los titulares filtrados y la palabra clave a la plantilla
+            context = {
+                'titulares': titulares_filtrados,
+                'palabra_clave': palabra_clave,
+            }
+            return render(request, 'noticias/resultados.html', context)
+        else:
+            mensaje_error = 'No se encontraron titulares relacionados con la palabra clave.'
+            return render(request, 'noticias/resultados.html', {'mensaje_error': mensaje_error})
+    else:
+        return redirect('home')
 
