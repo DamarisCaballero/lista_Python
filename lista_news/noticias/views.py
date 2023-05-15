@@ -6,25 +6,25 @@ def filtrar_titulares(palabra_clave):
     # Lista de titulares de noticias
     titulares = [
         "Aumenta la demanda de energías renovables",
-"Desarrollan vacuna efectiva contra el virus del dengue",
-"El mercado de criptomonedas experimenta volatilidad",
-"Descubren nueva especie de dinosaurio en América ",
-"Avanza la investigación para la cura del Alzheimer",
-"Lanzamiento exitoso del satélite espacial comercial",
-"Nuevas regulaciones para proteger el medio ambiente",
-"Inauguración de un parque dedicado a la historia local",
-"Las ventas de carros eléctricos alcanzan cifras récord",
-"Investigadores descubren evidencias de vida en Marte",
-"Crece la preocupación por el calentamiento global",
-"Se detecta una nueva variante de virus informático",
-"Declaran emergencia sanitaria por brote de enfermedad ",
-"Desarrollan tecnología para la generación de energía limpia",
-"Celebridades se unen para luchar contra el hambre en el mundo",
-"Avances en la inteligencia artificial transforman la industria",
-"Nuevo récord de producción de alimentos orgánicos",
-"Descubren posible cura para la diabetes tipo 2",
-"Conferencia aborda el futuro de la exploración espacial",
-"Invertir en bienes raíces: una opción segura ",
+        "Desarrollan vacuna efectiva contra el virus del dengue",
+        "El mercado de criptomonedas experimenta volatilidad",
+        "Descubren nueva especie de dinosaurio en América",
+        "Avanza la investigación para la cura del Alzheimer",
+        "Lanzamiento exitoso del satélite espacial comercial",
+        "Nuevas regulaciones para proteger el medio ambiente",
+        "Inauguración de un parque dedicado a la historia local",
+        "Las ventas de carros eléctricos alcanzan cifras récord",
+        "Investigadores descubren evidencias de vida en Marte",
+        "Crece la preocupación por el calentamiento global",
+        "Se detecta una nueva variante de virus informático",
+        "Declaran emergencia sanitaria por brote de enfermedad",
+        "Desarrollan tecnología para la generación de energía limpia",
+        "Celebrities se unen para luchar contra el hambre en el mundo",
+        "Avances en la inteligencia artificial transforman la industria",
+        "Nuevo récord de producción de alimentos orgánicos",
+        "Descubren posible cura para la diabetes tipo 2",
+        "Conferencia aborda el futuro de la exploración espacial",
+        "Invertir en bienes raíces: una opción segura",
     ]
 
     # Filtrar los titulares que incluyen la palabra clave
@@ -38,6 +38,9 @@ def home(request):
         palabra_clave = request.POST.get('palabra_clave')
         if palabra_clave:
             return redirect('resultados')
+        else:
+            mensaje_error = 'Por favor, ingresa una palabra clave.'
+            return render(request, 'noticias/home.html', {'mensaje_error': mensaje_error})
     return render(request, 'noticias/home.html')
 
 def resultados(request):
@@ -45,11 +48,15 @@ def resultados(request):
     if palabra_clave is not None:
         # Realizar la búsqueda y filtrar los titulares
         titulares_filtrados = filtrar_titulares(palabra_clave)
-        # Pasar los titulares filtrados y la palabra clave a la plantilla
-        context = {
-            'titulares': titulares_filtrados,
-            'palabra_clave': palabra_clave,
-        }
-        return render(request, 'noticias/resultados.html', context)
+        if len(titulares_filtrados) > 0:
+            # Pasar los titulares filtrados y la palabra clave a la plantilla
+            context = {
+                'titulares': titulares_filtrados,
+                'palabra_clave': palabra_clave,
+            }
+            return render(request, 'noticias/resultados.html', context)
+        else:
+            mensaje_error = f"No se encontraron titulares con la palabra clave '{palabra_clave}'."
+            return render(request, 'noticias/resultados.html', {'mensaje_error': mensaje_error})
     else:
         return redirect('home')
