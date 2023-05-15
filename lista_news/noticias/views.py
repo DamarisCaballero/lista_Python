@@ -35,19 +35,11 @@ def filtrar_titulares(palabra_clave):
 
 def home(request):
     if request.method == 'POST':
-        # Obtener la palabra clave del formulario enviado
-        palabra_clave = request.POST['palabra_clave']
-        # Realizar la búsqueda y filtrar los titulares
-        # (Debes completar esta parte según tu implementación)
-        titulares_filtrados = filtrar_titulares(palabra_clave)
-        # Pasar los titulares filtrados a la plantilla
-        context = {
-            'titulares': titulares_filtrados,
-            'palabra_clave': palabra_clave,
-        }
-        return redirect('resultados')
-    else:
-        return render(request, 'noticias/home.html')
+        palabra_clave = request.POST.get('palabra_clave')
+        if palabra_clave:
+            return redirect('resultados')
+    return render(request, 'noticias/home.html')
+
 
 def resultados(request):
     palabra_clave = request.GET.get('palabra_clave')
