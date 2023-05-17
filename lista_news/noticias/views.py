@@ -11,7 +11,6 @@ def filtrar_titulares(palabra_clave):
         "El mercado de criptomonedas experimenta volatilidad",
         "Descubren nueva especie de dinosaurio en América",
         "Avanza la investigación para la cura del Alzheimer",
-        "Lanzamiento exitoso del satélite espacial comercial",
         "Nuevas regulaciones para proteger el medio ambiente",
         "Inauguración de un parque dedicado a la historia local",
         "Las ventas de carros eléctricos alcanzan cifras récord",
