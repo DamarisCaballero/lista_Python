@@ -21,7 +21,6 @@ def filtrar_titulares(palabra_clave):
         "Desarrollan tecnología para la generación de energía limpia",
         "Celebrities se unen para luchar contra el hambre en el mundo",
         "Avances en la inteligencia artificial transforman la industria",
-        "Nuevo récord de producción de alimentos orgánicos",
         "Descubren posible cura para la diabetes tipo 2",
         "Conferencia aborda el futuro de la exploración espacial",
         "Invertir en bienes raíces: una opción segura",
